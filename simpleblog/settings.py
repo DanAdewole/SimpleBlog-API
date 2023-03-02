@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # 3rd party apps
+    "drf_yasg",
     "rest_framework",
     "rest_framework.authtoken",
     # Local apps
@@ -153,4 +154,3 @@ SIMPLE_JWT = {
     "SIGNING_KEY": settings.SECRET_KEY,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
-
