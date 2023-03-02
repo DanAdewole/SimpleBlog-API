@@ -10,6 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework import status, generics, mixins
 from rest_framework.decorators import api_view, APIView, permission_classes
 from django.shortcuts import get_object_or_404
+from drf_yasg.utils import swagger_auto_schema
 
 from .models import Post
 from .serializers import PostSerializer
@@ -78,9 +79,17 @@ class PostListCreateView(
         serializer.save(author=user)
         return super().perform_create(serializer)
 
+    @swagger_auto_schema(
+        operation_summary="List all posts",
+        operation_description="This returns a list of all posts"
+    )
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    @swagger_auto_schema(
+        operation_summary="Create a post",
+        operation_description="This endpoint creates a post"
+    )
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -151,12 +160,24 @@ class PostRetrieveUpdateDeleteView(
 
     """using generic APIView and mixins to retrieve, update and delete"""
 
+    @swagger_auto_schema(
+        operation_summary="Retrieve a post by id",
+        operation_description="This endpoint retrieves a post by an id"
+    )
     def get(self, request: Request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
+    @swagger_auto_schema(
+        operation_summary="Update a post by id",
+        operation_description="This endpoint updates a post by an id"
+    )
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
+    @swagger_auto_schema(
+        operation_summary="Deletes a post by id",
+        operation_description="This endpoint deletes a post by an id"
+    )
     def delete(self, request: Request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -212,5 +233,9 @@ class ListPostsForAuthor(
         
         return queryset
     
+    @swagger_auto_schema(
+        operation_summary="List posts for an author (user)",
+        operation_description="This endpoint retrieves a post by an id"
+    )
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
