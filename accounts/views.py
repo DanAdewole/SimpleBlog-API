@@ -9,6 +9,8 @@ from .serializers import SignUpSerializer
 
 
 class SignUpView(generics.GenericAPIView):
+    """sign up user"""
+    
     serializer_class = SignUpSerializer
 
     def post(self, request: Request):
@@ -24,6 +26,8 @@ class SignUpView(generics.GenericAPIView):
 
 
 class LogInView(APIView):
+    """login and authenticate user"""
+    
     def post(self, request: Request):
         email = request.data.get("email")
         password = request.data.get("password")
