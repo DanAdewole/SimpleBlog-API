@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from datetime import timedelta
 from pathlib import Path
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from django.conf import settings
 
@@ -23,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0+79icyq+#vcp_6n@7@(uu9uviqm-f6l9r61@q$3tn4v4=+6(l"
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-0+79icyq+#vcp_6n@7@(uu9uviqm-f6l9r61@q$3tn4v4=+6(l")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'DanielAdewole.pythonanywhere.com']
 
 
 # Application definition
@@ -126,6 +129,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
